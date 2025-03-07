@@ -1,0 +1,287 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #030014;
+  --color-light-100: #cecefb;
+  --color-light-200: #a8b5db;
+  --color-gray-100: #9ca4ab;
+  --color-dark-100: #0f0d23;
+  --font-dm-sans: DM Sans, sans-serif;
+  --breakpoint-xs: 480px;
+  --background-image-hero-pattern: url("/hero-bg.png");
+}
+
+@layer base {
+  body {
+    font-family: "DM Sans", serif;
+    font-optical-sizing: auto;
+    background: #030014;
+  }
+
+  h1 {
+    @apply mx-auto max-w-4xl text-center text-5xl font-bold leading-tight tracking-[-1%] text-white sm:text-[64px] sm:leading-[76px];
+  }
+
+  h2 {
+    @apply text-2xl font-bold text-white sm:text-3xl;
+  }
+
+  main {
+    @apply min-h-screen relative bg-primary;
+  }
+
+  header {
+    @apply sm:mt-10 mt-5;
+  }
+
+  header img {
+    @apply w-full max-w-lg h-auto object-contain mx-auto drop-shadow-md;
+  }
+}
+
+@layer components {
+  .pattern {
+    @apply bg-hero-pattern w-screen h-screen bg-center bg-cover absolute z-0;
+  }
+
+  .wrapper {
+    @apply px-5 py-12 xs:p-10 max-w-7xl mx-auto flex flex-col relative z-10;
+  }
+
+  .trending {
+    @apply mt-20;
+
+    & ul {
+      @apply flex flex-row overflow-y-auto gap-5 -mt-10 w-full hide-scrollbar;
+    }
+
+    & ul li {
+      @apply min-w-[230px] flex flex-row items-center;
+    }
+
+    & ul li p {
+      @apply fancy-text mt-[22px] text-nowrap;
+    }
+
+    & ul li img {
+      @apply w-[127px] h-[163px] rounded-lg object-cover -ml-3.5;
+    }
+  }
+
+  .search {
+    @apply w-full bg-light-100/5 px-4 py-3 rounded-lg mt-10 max-w-3xl mx-auto;
+
+    & div {
+      @apply relative flex items-center;
+    }
+
+    & img {
+      @apply absolute left-2 h-5 w-5;
+    }
+
+    & input {
+      @apply w-full bg-transparent py-2 sm:pr-10 pl-10 text-base text-gray-200 placeholder-light-200 outline-hidden;
+    }
+  }
+
+  .all-movies {
+    @apply space-y-9;
+
+    & ul {
+      @apply grid grid-cols-1 gap-5 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
+    }
+
+    & .pagination {
+      @apply flex flex-wrap justify-center gap-2 mt-8;
+    }
+
+    & .pagination-button {
+      @apply px-4 py-2 bg-dark-100 text-white rounded-lg hover:bg-light-200/20 transition-colors duration-200;
+    }
+
+    & .pagination-button.active {
+      @apply bg-light-200 text-dark-100;
+    }
+
+    & .pagination-button:disabled {
+      @apply opacity-50 cursor-not-allowed;
+    }
+  }
+
+  .bookmark {
+    @apply space-y-9;
+
+    & ul {
+      @apply grid grid-cols-1 gap-5 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
+    }
+  }
+
+  .movie-card {
+    @apply bg-dark-100 p-5 rounded-2xl shadow-inner shadow-light-100/10 relative overflow-hidden transform transition-all duration-300;
+    
+    /* Base styles */
+    & img {
+      @apply rounded-lg h-auto w-full transition-opacity duration-300;
+    }
+
+    & h3 {
+      @apply text-white font-bold text-base line-clamp-1;
+    }
+
+    & .content {
+      @apply mt-2 flex flex-row items-center flex-wrap gap-2;
+    }
+
+    & .content .align {
+      @apply mt-2 flex flex-row items-center flex-wrap gap-2;
+    }
+
+    & .content img {
+      @apply size-8 object-contain;
+    }
+
+    & .rating {
+      @apply flex flex-row items-center gap-1;
+    }
+
+    & .rating img {
+      @apply size-4 object-contain;
+    }
+
+    & .rating p {
+      @apply font-bold text-base text-white;
+    }
+
+    & .content span {
+      @apply text-sm text-gray-100;
+    }
+
+    & .content .lang {
+      @apply capitalize text-gray-100 font-medium text-base;
+    }
+
+    & .content .year {
+      @apply text-gray-100 font-medium text-base;
+    }
+
+    /* Hover effects */
+    &:hover {
+      @apply scale-105 shadow-lg;
+      box-shadow: 0 10px 20px rgba(147, 51, 234, 0.2);
+      
+      & img {
+        @apply opacity-80;
+      }
+    }
+
+    &::before {
+      content: '';
+      @apply absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-300 pointer-events-none;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    }
+
+    &:hover::before {
+      @apply opacity-100;
+    }
+  }
+
+  /* Movie Details Modal */
+  .movie-details{
+    @apply min-h-screen bg-primary relative mt-10;
+    
+    & .wrapper {
+      @apply px-5 py-12 xs:p-10 max-w-4xl mx-auto flex flex-col relative z-10;
+    }
+
+    & .back-button {
+      @apply mb-6 text-white text-lg hover:text-light-200 flex items-center gap-2;
+    }
+
+    & .modal-content {
+      @apply bg-dark-100 p-6 rounded-lg;
+      background: rgba(15, 13, 35, 0.9); /* Custom background with opacity instead of bg-opacity-50 */
+    }
+
+    & h2 {
+      @apply text-3xl text-white mb-6 sm:text-4xl;
+    }
+
+    & h3 {
+      @apply text-xl text-white mt-6 mb-3 sm:text-2xl;
+    }
+
+    & img {
+      @apply w-full mb-6 rounded-lg max-w-md mx-auto;
+    }
+
+    & p {
+      @apply text-white mb-2;
+    }
+
+    & strong {
+      @apply text-light-100;
+    }
+
+    & .trailer {
+      @apply mb-8;
+
+      & iframe {
+        @apply w-full h-64 rounded md:h-96;
+      }
+    }
+
+    & .summary {
+      @apply mb-8;
+
+      & p {
+        @apply text-gray-100 leading-relaxed text-lg;
+      }
+    }
+
+    & .cast {
+      @apply mb-8;
+
+      & ul {
+        @apply list-none space-y-3;
+      }
+
+      & li {
+        @apply text-gray-100 text-lg;
+      }
+
+      & .actor-name {
+        @apply text-white font-medium;
+      }
+
+      & .character {
+        @apply text-gray-200;
+      }
+    }
+
+    & .additional-details {
+      @apply grid grid-cols-1 gap-3 sm:grid-cols-2;
+    }
+  }
+}
+
+@utility text-gradient {
+  @apply bg-gradient-to-r from-[#A0E9FF] to-[#47B5FF] bg-clip-text text-transparent;
+}
+
+@utility fancy-text {
+  -webkit-text-stroke: 5px rgba(206, 206, 251, 0.5);
+  font-size: 190px;
+  font-family: "Bebas Neue", sans-serif;
+}
+
+@utility hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
