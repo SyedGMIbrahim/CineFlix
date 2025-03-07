@@ -2,6 +2,14 @@
 
 A React-based web application for browsing, searching, and bookmarking movies using the TMDB (The Movie Database) API. Features include trending movies, detailed movie pages, pagination, and a sleek UI styled with Tailwind CSS.
 
+## .env.local
+
+VITE_TMDB_API_KEY=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYzlmZjFkNmQxNGYyMDFiYjk1MTVhZGFhYmRmNWI0NyIsIm5iZiI6MTc0MDkxOTY2Mi44NjMwMDAyLCJzdWIiOiI2N2M0NTM2ZWE1ZTFlMzU4YzQ0YjE4M2YiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.Jmtz3WTMN8uN395bEwe6T99KoBJDLmYhfkoCvbebqtM
+VITE_APPWRITE_PROJECT_ID=67c732fb00260568e753
+VITE_APPWRITE_DATABASE_ID=67c733ad001d70842c0d
+VITE_APPWRITE_COLLECTION_ID_1=67c733fb0024e052c456
+VITE_APPWRITE_COLLECTION_ID_2=67c86b5d000318e0402d
+
 ## Features
 - **Search Movies:** Search for movies by title with debounced input for smooth API calls.
 - **Trending Movies:** View a list of the top 5 trending movies based on search popularity.
