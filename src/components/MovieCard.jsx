@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { checkBookmarkStatus, toggleBookmark } from '../appwrite';
-    
-const MovieCard = ({ movie, onMovieClick }) => {
+
+const MovieCard = ({ movie, onMovieClick, onBookmarkUpdate }) => {
   const [bookmarked, setBookmarked] = useState(false);
   const { id, title, vote_average, poster_path, release_date, original_language } = movie;
 
@@ -18,6 +18,7 @@ const MovieCard = ({ movie, onMovieClick }) => {
     try {
       await toggleBookmark(movie);
       setBookmarked(!bookmarked);
+      if (onBookmarkUpdate) await onBookmarkUpdate(); // Refresh bookmarks in App.jsx
     } catch (error) {
       console.error("Error in handleBookmark:", error);
     }
@@ -57,5 +58,5 @@ const MovieCard = ({ movie, onMovieClick }) => {
     </div>
   );
 };
-    
-export default MovieCard
+
+export default MovieCard;
