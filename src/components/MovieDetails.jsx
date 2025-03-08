@@ -31,8 +31,6 @@ const MovieDetails = ({ movie, onClose, onBookmarkUpdate }) => {
         if (!response.ok) throw new Error('Failed to fetch movie details');
         const data = await response.json();
         setMovieDetails(data);
-
-        // Check bookmark status
         const status = await checkBookmarkStatus(movie.id);
         setBookmarked(status);
       } catch (error) {
@@ -56,7 +54,7 @@ const MovieDetails = ({ movie, onClose, onBookmarkUpdate }) => {
     try {
       await toggleBookmark(movieDetails);
       setBookmarked(!bookmarked);
-      if (onBookmarkUpdate) await onBookmarkUpdate(); // Refresh App.jsx bookmarks
+      if (onBookmarkUpdate) await onBookmarkUpdate();
     } catch (error) {
       console.error('Error toggling bookmark in MovieDetails:', error);
     }
@@ -78,19 +76,13 @@ const MovieDetails = ({ movie, onClose, onBookmarkUpdate }) => {
           <div ref={contentRef}>
             <h2>{movieDetails.title}</h2>
             
-            <div className="flex flex-col sm:flex-row gap-6">
+            <div className="flex flex-col gap-6">
               <img 
                 src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`} 
                 alt={movieDetails.title}
                 className="w-full sm:w-1/3 rounded"
               />
               <div className="flex-1">
-                <button onClick={handleBookmark} className="bookmark-button mb-4">
-                  {bookmarked 
-                    ? <img src="/bookmark2.svg" alt="Unbookmark" className="w-6 h-6" />
-                    : <img src="/bookmark1.svg" alt="Bookmark" className="w-6 h-6" />
-                  }
-                </button>
 
                 {trailer && (
                   <div className="trailer">
@@ -99,7 +91,7 @@ const MovieDetails = ({ movie, onClose, onBookmarkUpdate }) => {
                       src={`https://www.youtube.com/embed/${trailer.key}`}
                       title={trailer.name}
                       allowFullScreen
-                      className="w-full h-64 rounded"
+                      className="w-full h-150 rounded"
                     />
                   </div>
                 )}
